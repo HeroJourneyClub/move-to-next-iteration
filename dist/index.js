@@ -9825,9 +9825,7 @@ const run = async () => {
     const newiterationType = core.getInput('new-iteration'); // current or next
     const statuses = core.getInput('statuses').split(',');
     const coreExclusedStatuses = core.getInput('excluded-statuses');
-    const excludedStatuses = coreExclusedStatuses?.split(',')
-    console.log("excludedStatuses", excludedStatuses)
-
+    const excludedStatuses = coreExclusedStatuses ? coreExclusedStatuses.split(',') : [];
 
     const project = new GitHubProject({ owner, number, token, fields: { iteration: iterationField } });
 
@@ -9847,11 +9845,9 @@ const run = async () => {
       if (item.fields.iteration !== iteration.title) return false;
       // If excludedStatuses are supplied, use that. Otherwise, use statuses.
       if (excludedStatuses?.length) {
-        console.log("excludedStatuses?.length", excludedStatuses?.length, item.fields.status)
         // Move item only if its status _is not_ in the excluded statuses list.
         return !excludedStatuses.includes(item.fields.status);
       } else {
-        console.log("statuses - item.fields.status", statuses, item.fields.status)
         // Move item only if its status _is_ in the statuses list.
         return statuses.includes(item.fields.status);
       }
