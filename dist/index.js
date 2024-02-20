@@ -552,8 +552,8 @@ class OidcClient {
             const res = yield httpclient
                 .getJson(id_token_url)
                 .catch(error => {
-                throw new Error(`Failed to get ID Token. \n 
-        Error Code : ${error.statusCode}\n 
+                throw new Error(`Failed to get ID Token. \n
+        Error Code : ${error.statusCode}\n
         Error Message: ${error.result.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
@@ -8008,7 +8008,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /************************************************************************/
 /******/ // The module cache
 /******/ var __webpack_module_cache__ = {};
-/******/ 
+/******/
 /******/ // The require function
 /******/ function __nccwpck_require__(moduleId) {
 /******/ 	// Check if module is in cache
@@ -8022,7 +8022,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 		// no module.loaded needed
 /******/ 		exports: {}
 /******/ 	};
-/******/ 
+/******/
 /******/ 	// Execute the module function
 /******/ 	var threw = true;
 /******/ 	try {
@@ -8031,16 +8031,16 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	} finally {
 /******/ 		if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 	}
-/******/ 
+/******/
 /******/ 	// Return the exports of the module
 /******/ 	return module.exports;
 /******/ }
-/******/ 
+/******/
 /************************************************************************/
 /******/ /* webpack/runtime/compat */
-/******/ 
+/******/
 /******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
-/******/ 
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
@@ -9824,7 +9824,10 @@ const run = async () => {
     const iterationType = core.getInput('iteration'); // last or current
     const newiterationType = core.getInput('new-iteration'); // current or next
     const statuses = core.getInput('statuses').split(',');
+    console.log("initial status", statuses)
     const excludedStatuses = core.getInput('excluded-statuses').split(',');
+    console.log("excludedStatuses", excludedStatuses)
+
 
     const project = new GitHubProject({ owner, number, token, fields: { iteration: iterationField } });
 
@@ -9844,9 +9847,11 @@ const run = async () => {
       if (item.fields.iteration !== iteration.title) return false;
       // If excludedStatuses are supplied, use that. Otherwise, use statuses.
       if (excludedStatuses?.length) {
+        console.log("excludedStatuses?.length", excludedStatuses?.length, item.fields.status)
         // Move item only if its status _is not_ in the excluded statuses list.
         return !excludedStatuses.includes(item.fields.status);
       } else {
+        console.log("statuses - item.fields.status", statuses, item.fields.status)
         // Move item only if its status _is_ in the statuses list.
         return statuses.includes(item.fields.status);
       }
@@ -9861,4 +9866,3 @@ const run = async () => {
 run();
 
 })();
-
