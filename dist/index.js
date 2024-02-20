@@ -9825,7 +9825,7 @@ const run = async () => {
     const newiterationType = core.getInput('new-iteration'); // current or next
     const statuses = core.getInput('statuses').split(',');
     console.log("initial status", statuses)
-    const excludedStatuses = core.getInput('excluded-statusessss').split(',').filter('');
+    const excludedStatuses = core.getInput('excluded-statuses').split(',').filter('');
     console.log("excludedStatuses", excludedStatuses)
 
 
