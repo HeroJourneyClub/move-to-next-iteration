@@ -9826,6 +9826,7 @@ const run = async () => {
     const statuses = core.getInput('statuses').split(',');
     const coreExclusedStatuses = core.getInput('excluded-statuses');
     const excludedStatuses = coreExclusedStatuses?.split(',')
+    console.log("excludedStatuses", excludedStatuses)
 
 
     const project = new GitHubProject({ owner, number, token, fields: { iteration: iterationField } });
