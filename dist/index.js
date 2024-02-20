@@ -9824,9 +9824,8 @@ const run = async () => {
     const iterationType = core.getInput('iteration'); // last or current
     const newiterationType = core.getInput('new-iteration'); // current or next
     const statuses = core.getInput('statuses').split(',');
-    console.log("initial status", statuses)
-    const excludedStatuses = core.getInput('excluded-statuses') ? core.getInput('excluded-statuses').split(',') : [];
-    console.log("excludedStatuses", excludedStatuses)
+    const coreExclusedStatuses = core.getInput('excluded-statuses');
+    const excludedStatuses = coreExclusedStatuses?.split(',')
 
 
     const project = new GitHubProject({ owner, number, token, fields: { iteration: iterationField } });
